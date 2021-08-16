@@ -1,0 +1,9 @@
+<mat-list-item role="listitem" (click)="todoClicked()">
+  <div [ngClass]="{ completed: todo.done }" class="item-container">
+    <span>{{ todo.label }}</span>
+    <span>{{ todo.category }}</span>
+    <span>
+      <button *ngIf="!todo.done" mat-button color="primary">Complete</button>
+    </span>
+  </div>
+</mat-list-item>

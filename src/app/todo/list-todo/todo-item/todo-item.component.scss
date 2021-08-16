@@ -1,0 +1,28 @@
+mat-list-item {
+  .item-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+
+    & .completed {
+      font-style: italic;
+      color: gray;
+      text-decoration-line: line-through;
+    }
+
+    :first-child {
+      width: 50%;
+    }
+    :nth-child(2) {
+      width: 30%;
+    }
+    :nth-child(3) {
+      width: 20%;
+    }
+  }
+}
+:hover {
+  cursor: pointer;
+  background-color: lightgray;
+}

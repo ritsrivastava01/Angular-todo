@@ -1,0 +1,9 @@
+<mat-list role="list">
+  <ng-container *ngFor="let todo of todoList$ | async">
+    <om-todo-item
+      [todo]="todo"
+      (todoClick)="todoClickHander($event)"
+    ></om-todo-item>
+    <mat-divider></mat-divider>
+  </ng-container>
+</mat-list>
