@@ -30,7 +30,7 @@ export class ListTodoComponent implements OnInit {
   private openDialog(): void {
     const selectedTodo = {};
     const dialogRef = this.dialog.open(ViewTodoDialogComponent, {
-      width: '250px',
+      width: '300px',
       data: selectedTodo,
     });
 
