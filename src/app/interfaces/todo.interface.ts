@@ -3,7 +3,7 @@ export interface ITodo {
   label?: string;
   description?: string;
   category?: Category;
-  done?: boolean;
+  done?: boolean | string;
 }
 export enum Category {
   BUREAUCRACY = 'bureaucracy',

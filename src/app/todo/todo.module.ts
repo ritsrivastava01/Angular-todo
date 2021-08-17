@@ -1,3 +1,4 @@
+import { TranslateModule } from '@ngx-translate/core';
 import { CreateTodoComponent } from './create-todo/create-todo.component';
 import { ViewTodoDialogComponent } from './view-todo-dialog/view-todo-dialog.component';
 import { ListTodoComponent } from './list-todo/list-todo.component';
@@ -8,6 +9,9 @@ import { MatListModule } from '@angular/material/list';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [
@@ -22,6 +26,10 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatDividerModule,
     MatButtonModule,
     MatDialogModule,
+    MatInputModule,
+    MatSelectModule,
+    MatSlideToggleModule,
+    TranslateModule,
   ],
   exports: [ListTodoComponent],
 })

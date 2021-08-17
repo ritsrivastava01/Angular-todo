@@ -1,9 +1,20 @@
-<mat-list-item role="listitem" (click)="todoClicked()">
-  <div [ngClass]="{ completed: todo.done }" class="item-container">
-    <span>{{ todo.label }}</span>
+<mat-list-item role="listitem">
+  <div class="item-container" [ngClass]="{ completed: !!todo.done }">
+    <span (click)="todoClicked($event)">{{ todo.label }}</span>
     <span>{{ todo.category }}</span>
     <span>
-      <button *ngIf="!todo.done" mat-button color="primary">Complete</button>
+      <button
+        id="update-todo"
+        *ngIf="!todo.done"
+        mat-button
+        color="primary"
+        (click)="completeHandler($event)"
+      >
+        {{ "list-todo.button" | translate }}
+      </button>
+      <span *ngIf="todo.done">
+        {{ "list-todo.completed-on" | translate }} {{ todo.done }}
+      </span>
     </span>
   </div>
 </mat-list-item>

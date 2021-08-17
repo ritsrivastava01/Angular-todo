@@ -1,0 +1,13 @@
+.list {
+  .search-box {
+    width: 30%;
+  }
+  mat-list {
+    background-color: #fff;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+  }
+  .mat-list-base {
+    padding: 0;
+  }
+}
