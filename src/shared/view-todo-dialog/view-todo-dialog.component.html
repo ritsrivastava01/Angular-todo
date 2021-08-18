@@ -1,0 +1,46 @@
+<h1 mat-dialog-title>{{ data.label }}</h1>
+<div mat-dialog-content>
+  <form class="example-form">
+    <mat-form-field class="full-width">
+      <mat-label>{{ "todo.label" | translate }}</mat-label>
+      <input matInput placeholder="title" value="{{ data.label }}" />
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>{{ "todo.category" | translate }}</mat-label>
+      <mat-chip-list #chipList aria-label="Fruit selection">
+        <mat-chip
+          *ngFor="let item of category"
+          [selectable]="selectable"
+          [removable]="removable"
+          (removed)="remove(item)"
+        >
+          {{ item }}
+          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+        </mat-chip>
+        <input
+          placeholder="New category..."
+          [matChipInputFor]="chipList"
+          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+          [matChipInputAddOnBlur]="addOnBlur"
+          (matChipInputTokenEnd)="add($event)"
+        />
+      </mat-chip-list>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>{{ "todo.desc" | translate }}</mat-label>
+      <textarea
+        matInput
+        placeholder="Description..."
+        value="{{ data.description }}"
+      ></textarea>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="cancelClick()">Cancel</button>
+  <button mat-button cdkFocusInitial>
+    {{ data.label ? "Update" : "Save" }}
+  </button>
+</div>

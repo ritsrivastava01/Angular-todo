@@ -1,9 +1,17 @@
 {
   "title": "TODO Application",
+  "add-new-todo": "Add New Todo",
   "list-todo": {
     "search": "Search Todo Item(s)",
     "completed": "Completed",
-    "button": "Complete",
-    "completed-on": "Completed on"
+    "button": "Mark Complete",
+    "completed-on": "Completed on",
+    "aria-label-delete": "Completed on"
+  },
+  "todo": {
+    "label": "Todo Label",
+    "desc": "Description",
+    "category":"Category"
+  
   }
 }

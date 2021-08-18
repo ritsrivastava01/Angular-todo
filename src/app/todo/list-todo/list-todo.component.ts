@@ -1,4 +1,4 @@
-import { ViewTodoDialogComponent } from '../view-todo-dialog/view-todo-dialog.component';
+import { ViewTodoDialogComponent } from '../../../shared/view-todo-dialog/view-todo-dialog.component';
 import { ITodo } from './../../interfaces/todo.interface';
 import {
   AfterViewInit,
@@ -7,26 +7,24 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
-import { fromEvent, Observable } from 'rxjs';
+import { fromEvent } from 'rxjs';
 import { TodoService } from '../service/todo.service';
 import {
   debounceTime,
   distinctUntilChanged,
-  filter,
   map,
   switchMap,
 } from 'rxjs/operators';
-import {
-  MatDialog,
-  MatDialogRef,
-  MAT_DIALOG_DATA,
-} from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
+import { DatePipe } from '@angular/common';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'om-list-todo',
   templateUrl: './list-todo.component.html',
   styleUrls: ['./list-todo.component.scss'],
+  providers: [DatePipe],
 })
 export class ListTodoComponent implements OnInit, AfterViewInit {
   private originalTodoList: ITodo[] = [];
@@ -36,11 +34,13 @@ export class ListTodoComponent implements OnInit, AfterViewInit {
     { key: 'not-completed', value: 1 },
   ];
   @ViewChild('searchBox') searchBox: ElementRef<HTMLElement>;
-  constructor(private todoService: TodoService, public dialog: MatDialog) {
-    this.todoService.getTodoList().subscribe((list: ITodo[]) => {
-      this.todoList = list;
-      this.originalTodoList = list;
-    });
+  constructor(
+    private todoService: TodoService,
+    public dialog: MatDialog,
+    private datePipe: DatePipe,
+    private snackBar: MatSnackBar
+  ) {
+    this.getTotoList();
   }
 
   ngAfterViewInit(): void {
@@ -59,12 +59,12 @@ export class ListTodoComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {}
 
-  public todoClickHander = (data: string) => {
-    this.openDialog();
+  public todoClickedHander = (id: string) => {
+    let todo = this.todoList.find((x) => x.id === id);
+    this.openDialog(todo);
   };
 
   public changeHandler = (data: MatSlideToggleChange): void => {
-    console.log(data.checked);
     if (data.checked) {
       this.todoList = this.originalTodoList.filter((x) => {
         return !x.done;
@@ -72,26 +72,38 @@ export class ListTodoComponent implements OnInit, AfterViewInit {
     } else {
       this.todoList = this.originalTodoList;
     }
-    console.log(this.todoList);
   };
 
-  public todoCompleteClickHandler = (id: string): void => {
+  public completeTodoHandler = (id: string): void => {
     let todo = this.originalTodoList.find((x) => x.id === id);
-    todo!.done = new Date().toString();
-    this.todoService.updateTodo(todo).subscribe((x) => console.log(x));
+    todo!.done = this.datePipe.transform(Date.now(), 'dd-MM-yyyy')?.toString();
+    this.todoService.updateTodo(todo).subscribe((x) => {
+      this.snackBar.open('Todo complected successfully');
+    });
   };
-  private openDialog(): void {
-    const selectedTodo = {};
+
+  public deleteTodoHandler = (id: string): void => {
+    this.todoService.deleteTodo(id).subscribe((x) => {
+      this.snackBar.open('Todo deleted successfully');
+    });
+  };
+  private openDialog(todo: ITodo | undefined): void {
     const dialogRef = this.dialog.open(ViewTodoDialogComponent, {
       width: '300px',
-      data: selectedTodo,
+      data: todo,
     });
 
     dialogRef.afterClosed().subscribe((result) => {
       console.log('The dialog was closed');
-      //this.animal = result;
     });
   }
+
+  private getTotoList = (): void => {
+    this.todoService.getTodoList().subscribe((list: ITodo[]) => {
+      this.todoList = list;
+      this.originalTodoList = list;
+    });
+  };
 }
 
 interface IStatus {

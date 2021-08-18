@@ -2,10 +2,6 @@ export interface ITodo {
   id?: string;
   label?: string;
   description?: string;
-  category?: Category;
+  category?: string;
   done?: boolean | string;
-}
-export enum Category {
-  BUREAUCRACY = 'bureaucracy',
-  HOUSE = 'House',
 }

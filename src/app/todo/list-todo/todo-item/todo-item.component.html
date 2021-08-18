@@ -1,20 +1,44 @@
 <mat-list-item role="listitem">
-  <div class="item-container" [ngClass]="{ completed: !!todo.done }">
-    <span (click)="todoClicked($event)">{{ todo.label }}</span>
-    <span>{{ todo.category }}</span>
-    <span>
+  <div class="item-container">
+    <div (click)="clickTodo()" class="details">
+      <mat-icon
+        *ngIf="!!todo.done"
+        aria-hidden="false"
+        aria-label="Example home icon"
+      >
+        done
+      </mat-icon>
+      <span [ngClass]="{ completed: !!todo.done }" class="title">
+        {{ todo.label }}
+      </span>
+      <mat-chip-list>
+        <mat-chip *ngFor="let item of category | slice: 0:3" class="mat-chip">{{
+          item
+        }}</mat-chip>
+      </mat-chip-list>
+    </div>
+
+    <span class="options">
       <button
         id="update-todo"
         *ngIf="!todo.done"
         mat-button
         color="primary"
-        (click)="completeHandler($event)"
+        (click)="completeTodo()"
       >
         {{ "list-todo.button" | translate }}
       </button>
       <span *ngIf="todo.done">
         {{ "list-todo.completed-on" | translate }} {{ todo.done }}
       </span>
+
+      <mat-icon
+        *ngIf="!!todo.done"
+        aria-hidden="false"
+        aria-label="Delete Todo"
+        (click)="deleteTodo()"
+        >delete</mat-icon
+      >
     </span>
   </div>
 </mat-list-item>

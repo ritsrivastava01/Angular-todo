@@ -4,7 +4,7 @@
       "id": "1",
       "label": "Kitchen Cleanup",
       "description": "Clean my dirty kitchen",
-      "category": "house",
+      "category": "house, Test1, test3, test4",
       "done": false
     },
     {
@@ -12,7 +12,7 @@
       "label": "Taxes",
       "description": "Start doing my taxes and contact my accountant jhon for advice",
       "category": "bureaucracy",
-      "done": "22-10-2019"
+      "done": "18-08-2021"
     },
     {
       "id": "3",

@@ -8,22 +8,23 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class TodoItemComponent implements OnInit {
   @Input() todo: ITodo;
-  @Output() todoClick: EventEmitter<string> = new EventEmitter<string>();
-  @Output() todoCompleteClick: EventEmitter<string> =
+  @Output() todoClicked: EventEmitter<string> = new EventEmitter<string>();
+  @Output() deleteTodoClicked: EventEmitter<string> =
     new EventEmitter<string>();
+  @Output() completeTodoClicked: EventEmitter<string> =
+    new EventEmitter<string>();
+  public category: string[] = [];
   constructor() {
     this.todo = {};
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.category = this.todo?.category ? this.todo?.category?.split(',') : [];
+  }
 
-  public todoClicked = (event: Event) => {
-    console.log(event.target);
-    this.todoClick.emit(this.todo.id);
-  };
+  public clickTodo = () => this.todoClicked.emit(this.todo.id);
 
-  public completeHandler = (event: Event): void => {
-    event.preventDefault();
-    this.todoCompleteClick.emit(this.todo.id);
-  };
+  public deleteTodo = () => this.deleteTodoClicked.emit(this.todo.id);
+
+  public completeTodo = (): void => this.completeTodoClicked.emit(this.todo.id);
 }

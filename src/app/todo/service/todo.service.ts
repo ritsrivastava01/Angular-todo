@@ -10,6 +10,7 @@ import { catchError, map } from 'rxjs/operators';
 })
 export class TodoService {
   private listTodo: ITodo[];
+  private URL: string = 'http://localhost:3000/tasks/';
   constructor(private http: HttpClient) {
     this.fetchTodoList$();
   }
@@ -32,14 +33,15 @@ export class TodoService {
 
   public updateTodo = (todo: ITodo | undefined): Observable<ITodo> => {
     console.log(todo);
-    return this.http.patch<ITodo>(
-      `http://localhost:3000/tasks/${todo?.id}`,
-      todo
-    );
+    return this.http.patch<ITodo>(`${this.URL}${todo?.id}`, todo);
+  };
+
+  public deleteTodo = (todoId: string): Observable<ITodo> => {
+    return this.http.delete(`${this.URL}${todoId}`);
   };
 
   private fetchTodoList$ = (): Observable<ITodo[]> => {
-    return this.http.get<ITodo[]>('http://localhost:3000/tasks').pipe(
+    return this.http.get<ITodo[]>(this.URL).pipe(
       catchError(() => {
         return [];
       }),

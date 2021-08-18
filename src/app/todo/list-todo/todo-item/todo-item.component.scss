@@ -4,16 +4,27 @@ mat-list-item {
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    .details {
+      display: inherit;
+      align-items: inherit;
+      width: 70%;
+      .title {
+        padding-right: 10px;
+        display: inline-block;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 50%;
+      }
 
-    :first-child {
-      width: 50%;
+      .mat-chip {
+        min-height: 20px;
+        font-size: 10px;
+      }
     }
-    :nth-child(2) {
-      width: 20%;
-    }
-    :nth-child(3) {
-      width: 30%;
-      text-align: end;
+    .options {
+      display: inherit;
+      align-items: inherit;
     }
   }
   .completed {

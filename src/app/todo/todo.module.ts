@@ -1,6 +1,5 @@
 import { TranslateModule } from '@ngx-translate/core';
 import { CreateTodoComponent } from './create-todo/create-todo.component';
-import { ViewTodoDialogComponent } from './view-todo-dialog/view-todo-dialog.component';
 import { ListTodoComponent } from './list-todo/list-todo.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -12,14 +11,12 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatIconModule } from '@angular/material/icon';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
-  declarations: [
-    ListTodoComponent,
-    ViewTodoDialogComponent,
-    CreateTodoComponent,
-    TodoItemComponent,
-  ],
+  declarations: [ListTodoComponent, CreateTodoComponent, TodoItemComponent],
   imports: [
     CommonModule,
     MatListModule,
@@ -30,6 +27,9 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatSelectModule,
     MatSlideToggleModule,
     TranslateModule,
+    MatIconModule,
+    MatChipsModule,
+    MatSnackBarModule,
   ],
   exports: [ListTodoComponent],
 })

@@ -1,6 +1,6 @@
 <div class="list">
-  <div>
-    <mat-form-field class="search-box">
+  <div class="search-box">
+    <mat-form-field>
       <input
         #searchBox
         type="search"
@@ -8,14 +8,6 @@
         placeholder="{{ 'list-todo.search' | translate }}"
         value=""
       />
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Todo Status</mat-label>
-      <mat-select>
-        <mat-option *ngFor="let status of statusList" [value]="status.value">
-          {{ status.key }}
-        </mat-option>
-      </mat-select>
     </mat-form-field>
     <mat-slide-toggle (change)="changeHandler($event)">{{
       "list-todo.completed" | translate
@@ -26,8 +18,9 @@
     <ng-container *ngFor="let todo of todoList">
       <om-todo-item
         [todo]="todo"
-        (todoClick)="todoClickHander($event)"
-        (todoCompleteClick)="todoCompleteClickHandler($event)"
+        (todoClicked)="todoClickedHander($event)"
+        (completeTodoClicked)="completeTodoHandler($event)"
+        (deleteTodoClicked)="deleteTodoHandler($event)"
       ></om-todo-item>
       <mat-divider></mat-divider>
     </ng-container>

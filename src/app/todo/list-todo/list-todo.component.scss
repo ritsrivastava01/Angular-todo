@@ -1,6 +1,12 @@
 .list {
   .search-box {
-    width: 30%;
+    display: flex;
+    justify-content: space-between;
+    margin-right: 10px;
+    align-items: center;
+    mat-form-field {
+      width: 50%;
+    }
   }
   mat-list {
     background-color: #fff;

@@ -1,5 +1,11 @@
 <om-header></om-header>
 
 <div class="container">
+  <div class="flex-left" primary>
+    <button mat-raised-button color="primary" (click)="addNewTodoHandler()">
+      {{ "add-new-todo" | translate }}
+    </button>
+  </div>
+
   <om-list-todo> </om-list-todo>
 </div>

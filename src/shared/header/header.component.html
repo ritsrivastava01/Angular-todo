@@ -1,3 +1,27 @@
 <mat-toolbar color="primary">
   <span>{{ "title" | translate }}</span>
+  <div>
+    <div>
+      <button
+        mat-button
+        (click)="changeLanguage('en')"
+        [ngClass]="{ 'text-primary': selectedLanguage === 'en' }"
+        aria-label="translate the site in English"
+        data-test="en"
+      >
+        EN
+      </button>
+
+      <span class="text-white">|</span>
+      <button
+        mat-button
+        [ngClass]="{ 'text-primary': selectedLanguage === 'nl' }"
+        (click)="changeLanguage('nl')"
+        aria-label="translate the site in Nederlands"
+        data-test="nl"
+      >
+        NL
+      </button>
+    </div>
+  </div>
 </mat-toolbar>
